@@ -289,25 +289,29 @@ HTML
             pauseBtn.textContent = isPaused ? "繼續" : "暫停";
         }
 
-        // 鍵盤控制
-        window.addEventListener("keydown", e => {
-            if (!isRunning || isPaused) return;
-            switch (e.key) {
-                case "ArrowUp":
-                    if (dy === 0) { dx = 0; dy = -1; }
-                    break;
-                case "ArrowDown":
-                    if (dy === 0) { dx = 0; dy = 1; }
-                    break;
-                case "ArrowLeft":
-                    if (dx === 0) { dx = -1; dy = 0; }
-                    break;
-                case "ArrowRight":
-                    if (dx === 0) { dx = 1; dy = 0; }
-                    break;
-            }
-        });
+  window.addEventListener("keydown", e => {
+    // 按下 Enter 鍵即可開始或重新開始遊戲
+    if (e.key === "Enter") {
+        startGame();
+        return;
+    }
 
+    if (!isRunning || isPaused) return;
+    switch (e.key) {
+        case "ArrowUp":
+            if (dy === 0) { dx = 0; dy = -1; }
+            break;
+        case "ArrowDown":
+            if (dy === 0) { dx = 0; dy = 1; }
+            break;
+        case "ArrowLeft":
+            if (dx === 0) { dx = -1; dy = 0; }
+            break;
+        case "ArrowRight":
+            if (dx === 0) { dx = 1; dy = 0; }
+            break;
+    }
+});
         // 手機虛擬鍵盤控制
         document.getElementById("btn-up").addEventListener("click", () => {
             if (isRunning && !isPaused && dy === 0) { dx = 0; dy = -1; }
